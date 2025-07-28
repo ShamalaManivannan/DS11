@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 data = pd.read_csv("adult.csv")
 
 
-data.columns = ['age', ' workclass', 'Id','education', 'educational-num',
+data.columns = ['age', 'workclass', 'Id','education', 'educational-num',
                 'marital-status','occupation','relationship','race','gender',''
                 'capital-gain','capital-loss','hours-per-week','native-country','income']
 
@@ -76,4 +76,22 @@ data["marital"] = data["marital"].map({' Divorced':0, ' Widowed':1, ' Never-marr
 print(data.head())
 
 data.groupby("marital").income.mean().plot(kind="bar")
+plt.show()
+#Education
+education = set(data["education"])
+print(education)
+
+data["education"] = data["education"].map({' Masters':0, ' Prof-school':1, ' Preschool':2, ' 12th':3, ' Assoc-voc':4, ' 1st-4th':5, ' Some-college':6, ' 11th':7, ' Assoc-acdm':8, ' Doctorate':9, ' Bachelors':10, ' 9th':11, ' 5th-6th':12, ' 7th-8th':13, ' 10th':14, ' HS-grad':15})
+print(data.head())
+
+data.groupby("education").income.mean().plot(kind="bar")
+plt.show()
+#Workclass
+workclass = set(data["workclass"])
+print(workclass)
+
+data["workclass"] = data["workclass"].map({' Local-gov':0, ' Federal-gov':1, ' Never-worked':2, ' ?':3, ' Self-emp-not-inc':4, ' State-gov':5, ' Private':6, ' Self-emp-inc':7, ' Without-pay':8})
+print(data.head())
+
+data.groupby("workclass").income.mean().plot(kind="bar")
 plt.show()
